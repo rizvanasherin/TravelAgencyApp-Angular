@@ -1,0 +1,107 @@
+
+<!--Template driven form-->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark pr-5">
+    <a class="navbar-brand" href="#" style="margin-left: 50px;font-weight: bolder;">Trip Planner</a>
+  
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/home']">Home</a>
+        </li>
+      <li class="nav-item" >
+        <a class="nav-link"  [routerLink]="['/login']">Register</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" (click)="logOut()">Login</a>
+      </li>
+    </ul>
+  </nav>
+  <div
+  class="bg-image-xl p-5  text-center shadow-1-strong mb-5 text-white"
+  style="background-image: url('https://images.pexels.com/photos/952670/pexels-photo-952670.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'); margin-bottom: 1000px;">
+<form name="empform" #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+    <h3>Sign Up</h3>
+    <hr>
+    <!--Customer ID---Hidden-->
+    <input type="hidden" name="UserId" [(ngModel)]="empService.formData1.UserId">
+    <!--CustomerName-->
+    <div class="form-group">
+        <label for="" style="float: left;margin-bottom: 10px;">User Name :</label>
+        <input type="text" name="UserName" #UserName="ngModel" [(ngModel)]="empService.formData1.UserName"
+            class="form-control" placeholder="Enter User Name" required minlength="1" maxlength="25"
+            [ngClass]="{'is-invalid':UserName.touched && UserName.invalid}" />
+
+        <!--CustomerName validation-->
+        <div class="validation-error" *ngIf="UserName.touched && UserName.invalid">
+            <div *ngIf="UserName.errors">
+                UserName is required!
+            </div>
+        </div>
+    </div>
+
+        <!--Email-->
+        <div class="form-group">
+            <label for="" style="float: left;margin-bottom: 10px;">Email Address :</label>
+            <input type="text" name="UserEmail" #UserEmail="ngModel" [(ngModel)]="empService.formData1.UserEmail"
+                class="form-control" placeholder="Enter Email Address" required minlength="5" maxlength="30"
+                [ngClass]="{'is-invalid':UserEmail.touched && UserEmail.invalid}" />
+    
+            <!--Email validation-->
+            <div class="validation-error" *ngIf="UserEmail.touched && UserEmail.invalid">
+                <div *ngIf="UserEmail.errors">
+                    Email is required!
+                </div>
+            </div>
+        </div>
+
+
+            <!--Phone Number-->
+    <div class="form-group">
+        <label for="" style="float: left;margin-bottom: 10px;">Phone Number :</label>
+        <input type="text" name="UserContact" #UserContact="ngModel" [(ngModel)]="empService.formData1.UserContact"
+            class="form-control" placeholder="Enter your number" required minlength="10" maxlength="10"
+            [ngClass]="{'is-invalid':UserContact.touched && UserContact.invalid}" />
+
+        <!--Sex validation-->
+        <div class="validation-error" *ngIf="UserContact.touched && UserContact.invalid">
+            <div *ngIf="UserContact.errors">
+                Phone number is required!
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" >
+        <label for="" style="float: left;margin-bottom: 10px;">Password :</label>
+        <input type="text" name="UserPassword" #UserPassword="ngModel" [(ngModel)]="empService.formData1.UserPassword"
+            class="form-control" placeholder="Enter a strong password" required minlength="4" maxlength="10"
+            [ngClass]="{'is-invalid':UserPassword.touched && UserContact.invalid}" />
+
+        <!--UserPassword validation-->
+        <div class="validation-error" *ngIf="UserPassword.touched && UserPassword.invalid">
+            <div *ngIf="UserPassword.errors">
+                Password is required!
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="" style="float: left;margin-bottom: 10px;">Role :</label>
+        <select name="RoleId" id="RoleId" class="form-control" #RoleId="ngModel" required
+            [(ngModel)]="empService.formData1.RoleId">
+            <option value="0" disabled>-- Choose the Type --</option>
+            <option value="4">New User</option>
+        </select>
+    </div>
+    <!--Submit-->
+    <br>
+    <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-primary form-control"
+            [disabled]="!(form.valid && form.dirty)">Submit</button>
+    </div>
+</form>
+<footer class="footer-fluid footer-expand-md footer-light bg-dark footer-fixed-bottom"
+style="margin-top: 550px;">
+<div class="container-expand text-white " style="text-align:center">
+    <span><b>All rights reserved 2022 @Experion</b></span>
+</div>
+</footer>
+  </div>

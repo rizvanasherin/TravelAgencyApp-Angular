@@ -1,0 +1,23 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark pr-5">
+        <a class="navbar-brand" href="#" style="margin-left: 50px;font-weight: bolder;">Trip Planner</a>
+      
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" >
+            <a class="nav-link" >Home</a>
+          </li>
+          <li class="nav-item" >
+            <a class="nav-link" (click)="insertPlan()">Create Custom Plan</a>
+          </li>
+          <li class="nav-item" >
+            <a class="nav-link" (click)="logOut()">Logout</a>
+          </li>
+          <li class="nav-item" >
+            <a class="nav-link" style="margin-left: 1200px;" (click)="logOut()"><span class="bi bi-search" style="color: aliceblue;"></span>Welcome: {{loggedUser}}
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <app-plan-list></app-plan-list>
+</header>
+

@@ -1,0 +1,56 @@
+<div class="bg-image-xl p-5  text-center shadow-1-strong mb-5 text-white"
+    style="background-image: url('https://images.pexels.com/photos/952670/pexels-photo-952670.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'); margin-bottom: 1000px;">
+    
+    <div class="conainer">
+        <div class="header" style="margin-top:10px;">
+            <P style="font-family: 'Times New Roman', Times, serif;font-weight: bolder;font-size: larger;">ADMIN PANEL
+            </P>
+            <div class="form-control" style="margin-top: 30px;">
+                <!--search functionality-->
+                <input type="text" class="form-control" placeholder="Search plan here" [(ngModel)]="filter">
+            </div>
+            <a [routerLink]="" class="btn btn-primary" style="float: right; margin-top: 10px;margin-bottom: 10px;"
+                (click)="insertTravelPlan()">
+                Add Plan
+            </a>
+        </div>
+
+        <!--List of plans-->
+        <table class="table table-bordered text-white" style="margin-top: 100px;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Plan Name</th>
+                    <th>Plan Price</th>
+                    <th>Transportation</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let emp of planService.travelplans | filter : filter | paginate: {itemsPerPage : 6, currentPage : page}">
+                    <td>{{emp.PlanId}}</td>
+                    <td>{{emp.PlanName}}</td>
+                    <td>{{emp.PricePerDay}}</td>
+                    <td>{{emp.TransportationId}}</td>
+                    <td>
+                        <!--button-->
+                        <button class="btn btn-sm btn-primary" (click)="updateTravelPlan(emp.PlanId)">Edit</button>
+                        &nbsp;
+                        <button class="btn btn-sm btn-warning" (click)="DeleteTravelPlan(emp.PlanId)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="footer">
+            <!--pagination-->
+            <pagination-controls (pageChange)="page=($event)"></pagination-controls>
+        </div>
+        <!-- Footer -->
+        <footer class="footer-fluid footer-expand-md footer-light bg-dark footer-fixed-bottom"
+            style="margin-top: 220px;">
+            <div class="container-expand text-white " style="text-align:center">
+                <span><b>All rights reserved 2022 @Experion</b></span>
+            </div>
+        </footer>
+    </div>

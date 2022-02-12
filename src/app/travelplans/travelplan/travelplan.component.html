@@ -1,0 +1,126 @@
+<!--Template driven form-->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark pr-5">
+    <a class="navbar-brand" href="#" style="margin-left: 50px;font-weight: bolder;">Trip Planner</a>
+  
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" >
+        <a class="nav-link" [routerLink]="['/user']">Home</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" (click)="insertPlan()">Create Custom Plan</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" (click)="logOut()">Logout</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" style="margin-left: 1200px;" (click)="logOut()"><span class="bi bi-search" style="color: aliceblue;"></span>Welcome: {{loggedUser}}
+        </a>
+      </li>
+    </ul>
+  </nav>
+<div class="bg-image-xl p-5  text-center shadow-1-strong mb-5 text-white"
+    style="background-image: url('https://images.pexels.com/photos/952670/pexels-photo-952670.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'); margin-bottom: 1000px;">
+    <form name="empform" #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)" class="form-horizontal">
+        <h3>Customize your Travel plan</h3>
+        <hr>
+        <!--Customer ID---Hidden-->
+        <input type="hidden" name="CustomId" [(ngModel)]="planService.formData.CustomId">
+
+        <!--Typedropdown-->
+        <div class="form-group">
+            <label for="" style="float: left;">Plan Type :</label>
+            <select name="TypeId" id="TypeId" class="form-control" #TypeId="ngModel" required
+                [(ngModel)]="planService.formData5.TypeId">
+                <option value="0" disabled>-- Select the Plan Type --</option>
+                <option *ngFor="let type of planService.types" value="{{type.TypeId}}">{{type.Type}}
+                </option>
+            </select>
+
+            <!--Type validation-->
+            <div class="validation-error" *ngIf="TypeId.touched && TypeId.invalid">
+                <div *ngIf="TypeId.errors.required">
+                    Type is required!
+                </div>
+            </div>
+        </div>
+
+
+        <!--Destinations dropdown-->
+        <div class="form-group">
+            <label for="" style="float: left;">Destination :</label>
+            <select name="DestinationId" id="DestinationId" class="form-control" #DestinationId="ngModel" required
+                [(ngModel)]="planService.formData3.DestinationId">
+                <option value="0" disabled>-- Select your Destination --</option>
+                <option *ngFor="let dest of planService.destinations" value="{{dest.DestinationId}}">
+                    {{dest.DestinationName}}
+                </option>
+            </select>
+
+            <!--Destinations  validation-->
+            <div class="validation-error" *ngIf="DestinationId.touched && DestinationId.invalid">
+                <div *ngIf="DestinationId.errors.required">
+                    Destination is required!
+                </div>
+            </div>
+        </div>
+
+        <!--Transportation dropdown-->
+        <div class="form-group">
+            <label for="" style="float: left;">Transportation Type :</label>
+            <select name="TransportationId" id="TransportationId" class="form-control" #TransportationId="ngModel"
+                required [(ngModel)]="planService.formData4.TransportationId">
+                <option value="0" disabled>-- Select your Mode of Transportaion --</option>
+                <option *ngFor="let tr of planService.transportations" value="{{tr.TransportationId}}">
+                    {{tr.TransportationName}}
+                </option>
+            </select>
+
+            <!--Transportation  validation-->
+            <div class="validation-error" *ngIf="TransportationId.touched && TransportationId.invalid">
+                <div *ngIf="TransportationId.errors.required">
+                    Transportation is required!
+                </div>
+            </div>
+        </div>
+
+        <!--Period dropdown-->
+        <div class="form-group">
+            <label for="" style="float: left;">Trip Period :</label>
+            <select name="PeriodId" id="PeriodId" class="form-control" #PeriodId="ngModel" required
+                [(ngModel)]="planService.formData2.PeriodId">
+                <option value="0" disabled>-- Select your Travel period --</option>
+                <option *ngFor="let dest of planService.periods" value="{{dest.PeriodId}}">
+                    {{dest.PeriodOfDays}}
+                </option>
+            </select>
+
+            <!--periods  validation-->
+            <div class="validation-error" *ngIf="PeriodId.touched && PeriodId.invalid">
+                <div *ngIf="PeriodId.errors.required">
+                    Period is required!
+                </div>
+            </div>
+        </div>
+
+                <!--Starting Date -->
+                <div class="form-group">
+                    <label for="" style="float: left;">Starting Date :</label>
+                    <input type="date" name="DateOfTrip" #Age="ngModel" [(ngModel)]="planService.formData.DateOfTrip"
+                        class="form-control" required 
+                        />
+                </div>
+
+
+
+        <!--Submit-->
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-primary form-control">Submit</button>
+        </div>
+    </form>
+    <footer class="footer-fluid footer-expand-md footer-light bg-dark footer-fixed-bottom" style="margin-top: 250px;">
+        <div class="container-expand text-white " style="text-align:center">
+            <span><b>All rights reserved 2022 @Experion</b></span>
+        </div>
+    </footer>
+</div>

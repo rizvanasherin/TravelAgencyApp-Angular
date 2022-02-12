@@ -1,0 +1,80 @@
+<div class="bg-image-fluid p-5  text-center shadow-1-strong mb-5 text-white"
+    style="background-image: url('https://images.pexels.com/photos/952670/pexels-photo-952670.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'); margin-bottom: 1000px;">
+    <!--search functionality-->
+    <input type="text" class="form-control" placeholder="Search by destination / price  / period of trip"
+        [(ngModel)]="filter">
+    <h1 style="font-style: oblique;margin-bottom: 30px;margin-top: 30px;">...Select Your Dream Destinations...</h1>
+
+    <div class="container cta-100" style="align-items: center;margin-left: 680px;">
+        <div class="container">
+            <div class="col blog">
+                <div class="col-md-12">
+                    <div id="blogCarousel" class="carousel slide container-blog" data-ride="carousel">
+                        <!-- Carousel items -->
+                        <div class="carousel-inner" *ngFor="let clt of planService.plans | filter : filter |  paginate: {itemsPerPage : 1, currentPage : page}">
+                            <div class="carousel-item active">
+                                <div class="col" style="align-items: center;">
+                                    <div class="col-md-4">
+                                        <div class="item-box-blog" style="align-items: center;">
+                                            <div class="item-box-blog-image">
+                                                <!--Custom id-->
+                                                <div class="item-box-blog-date bg-blue-ui white"> <span
+                                                        class="mon">{{clt.CustomId}}</span> </div>
+                                                <!--Image-->
+                                                <figure> <img alt=""
+                                                        src="https://th.bing.com/th/id/R.14ed684efdab0cf901862c5743e66276?rik=x5l4%2fXC8TAxXuw&riu=http%3a%2f%2fwww.helloshiva.com%2fwp-content%2fuploads%2f2016%2f01%2fdelhi.jpg&ehk=%2fERincL%2f9hxcA8tOS%2fjJ%2ffI9x5Yro58F0JrqflQ3H1o%3d&risl=&pid=ImgRaw&r=0">
+                                                </figure>
+                                            </div>
+                                            <div class="item-box-blog-body">
+                                                <!--Heading-->
+                                                <div class="item-box-blog-heading">
+                                                    <a href="#" tabindex="0">
+                                                        <h5 style="color: goldenrod;font-size: larger;">{{clt.PlanName}}
+                                                        </h5>
+                                                    </a>
+                                                </div>
+                                                <!--Data-->
+                                                <div class="item-box-blog-data" style="padding: px 15px;">
+                                                    <p style="font-size: medium;"><i class="fa fa-user-o"></i>Rs.
+                                                        {{clt.PricePerDay}}, <i class="fa fa-comments-o"></i>
+                                                        {{clt.PeriodOfDays}} Days</p>
+                                                </div>
+                                                <div class="item-box-blog-data" style="padding: px 15px;">
+                                                    <h2 style="font-size: large;"><i
+                                                            class="fa fa-user-o"></i>{{clt.DestinationName}} </h2>
+                                                </div>
+
+                                                <div class="item-box-blog-data" style="padding: px 15px;">
+                                                    <p style="font-size: medium;"><i class="fa fa-user-o"></i> Places
+                                                        Covered : <br> {{clt.PlaceName}}</p>
+                                                </div>
+
+                                                <div class="mt"> <a href="#" tabindex="0"
+                                                        class="btn btn-primary white read">Select</a> </div>
+                                                <div class="mt" style="margin-left: 10px;"> <a href="#" tabindex="0"
+                                                        class="btn btn-danger white read">Read More</a> </div>
+                                                <!-- Buttons-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--.row-->
+                                </div>
+                                <!--.item-->
+                            </div>
+                            <!--.carousel-inner-->
+                        </div>
+                        <!--.Carousel-->
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <!--pagination-->
+        <pagination-controls (pageChange)="page=($event)"></pagination-controls>
+        <footer class="footer-fluid footer-light bg-dark footer-fixed-bottom"
+            style="margin-top: 100px;align-items: center;margin-right: 860px;">
+
+            <div class="container-expand text-white " style="text-align:center">
+                <span><b>All rights reserved 2022 @Experion</b></span>
+            </div>
+        </footer>
+    </div>

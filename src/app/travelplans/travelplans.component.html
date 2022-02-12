@@ -1,0 +1,86 @@
+<!--Template driven form-->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark pr-5">
+    <a class="navbar-brand" href="#" style="margin-left: 50px;font-weight: bolder;">Trip Planner</a>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin']">List of Plans</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/report']">Reports</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="logOut()">Logout</a>
+        </li>
+    </ul>
+</nav>
+<div class="bg-image-xl p-5  text-center shadow-1-strong mb-5 text-white"
+    style="background-image: url('https://images.pexels.com/photos/952670/pexels-photo-952670.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'); margin-bottom: 1000px;">
+    <form name="empform" #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)" class="form-horizontal">
+        <h3>Add New Travel plan</h3>
+        <hr>
+        <!--Plan ID---Hidden-->
+        <input type="hidden" name="PlanId" [(ngModel)]="planService.formData6.PlanId">
+
+        <!--Plan Name-->
+        <div class="form-group">
+            <label for=""style="float: left;">Plan Name :</label>
+            <input type="text" name="PlanName" #PlanName="ngModel" [(ngModel)]="planService.formData6.PlanName"
+                class="form-control" placeholder="Enter Plan Name" required minlength="6" maxlength="25"
+                [ngClass]="{'is-invalid':PlanName.touched && PlanName.invalid}" />
+
+            <!--PlanName validation-->
+            <div class="validation-error" *ngIf="PlanName.touched && PlanName.invalid">
+                <div *ngIf="PlanName.errors">
+                    Plan Name is required!
+                </div>
+            </div>
+        </div>
+
+        <!--Plan Price-->
+        <div class="form-group">
+            <label for="" style="float: left;">Plan Price :</label>
+            <input type="text" name="PricePerDay" #PricePerDay="ngModel" [(ngModel)]="planService.formData6.PricePerDay"
+                class="form-control" placeholder="Enter Plan Price" required minlength="2" maxlength="25"
+                [ngClass]="{'is-invalid':PricePerDay.touched && PricePerDay.invalid}" />
+
+            <!--Plan price validation-->
+            <div class="validation-error" *ngIf="PricePerDay.touched && PricePerDay.invalid">
+                <div *ngIf="PricePerDay.errors">
+                    Plan Name is required!
+                </div>
+            </div>
+        </div>
+
+
+        <!--Transportation dropdown-->
+        <div class="form-group">
+            <label for="" style="float: left;">Transportation Type :</label>
+            <select name="TransportationId" id="TransportationId" class="form-control" #TransportationId="ngModel"
+                required [(ngModel)]="planService.formData4.TransportationId">
+                <option value="0" disabled>-- Select your Mode of Transportaion --</option>
+                <option *ngFor="let tr of planService.transportations" value="{{tr.TransportationId}}">
+                    {{tr.TransportationName}}
+                </option>
+            </select>
+
+            <!--Transportation  validation-->
+            <div class="validation-error" *ngIf="TransportationId.touched && TransportationId.invalid">
+                <div *ngIf="TransportationId.errors.required">
+                    Transportation is required!
+                </div>
+            </div>
+        </div>
+
+        <!--Submit-->
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-primary form-control">Submit</button>
+        </div>
+    </form>
+    <footer class="footer-fluid footer-expand-md footer-light bg-dark footer-fixed-bottom" style="margin-top: 400px;margin-bottom: 200px;">
+        <div class="container-expand text-white " style="text-align:center">
+            <span><b>All rights reserved 2022 @Experion</b></span>
+        </div>
+    </footer>
+</div>
